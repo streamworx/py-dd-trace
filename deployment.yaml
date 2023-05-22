@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: flaskhello
+    tags.datadoghq.com/env: "dev"
+    tags.datadoghq.com/service: "flaskhello"
+    tags.datadoghq.com/version: "1.0"
+  name: flaskhello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskhello
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: flaskhello
+        tags.datadoghq.com/env: "dev"
+        tags.datadoghq.com/service: "flaskhello"
+        tags.datadoghq.com/version: "1.0"
+        admission.datadoghq.com/enabled: "true"
+      annotations:
+        admission.datadoghq.com/python-lib.version: latest
+        ad.datadoghq.com/flaskhello.logs: '[{"source": "python","service": "flaskhello","tags": ["env:dev"]}]'
+    spec:
+      containers:
+        - image: erwinkodiat/testpython:latest
+          imagePullPolicy: Always
+          name: flaskhello
+          env:
+            - name: DD_PROFILING_ENABLED
+              value: "true"
+            - name: DD_LOGS_INJECTION
+              value: "true"
+          # envFrom:
+          #   - configMapRef:
+          #       name: postgres-config
+          resources: {}
+status: {}
