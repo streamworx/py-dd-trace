@@ -1,0 +1,14 @@
+Flask==1.1.2
+importlib-metadata==6.6.0
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+Werkzeug==1.0.1
+ddtrace==0.57.3   ### kuncinya ini --> harus dimasukin ke requirements.txt
+protobuf==3.14.0
+
+#JSON-log-formatter
+# blinker==1.6.2
+# click==8.1.3
+# zipp==3.15.0
+
